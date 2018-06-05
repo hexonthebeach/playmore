@@ -1,0 +1,18 @@
+{
+    "name":        "hexonthebeach/playmore",
+    "description": "PHP library for ClayMore miner remote management",
+    "homepage":    "https://github.com/hexonthebeach/playmore",
+    "type":        "library",
+    "keywords":    ["claymore","ethereum","crypto","mining","miner","remote management","EthMan"],
+    "authors":     [
+        {"name":"Niels Verbaken"}
+    ],
+    "require":     {
+        "php": ">= 5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PlayMore\\": "src/"
+        }
+    }
+}
