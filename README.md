@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/hexonthebeach/playmore.svg?branch=develop)](https://travis-ci.com/hexonthebeach/playmore)
+[![codecov](https://codecov.io/gh/hexonthebeach/playmore/branch/develop/graph/badge.svg)](https://codecov.io/gh/hexonthebeach/playmore)
+
 # PlayMore
 
 A PHP library for remote management of ClayMore miners.

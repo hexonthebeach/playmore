@@ -49,8 +49,13 @@ class ClaySocket
     {
         // if there is no connection yet
         if( !$this->socket ) {
-            // open it
-            $this->socket = fsockopen($this->host, $this->port, $this->errno, $this->errstr, self::CONN_TIMEOUT);
+            try {
+                // open it
+                $this->socket = fsockopen($this->host, $this->port, $this->errno, $this->errstr, self::CONN_TIMEOUT);
+
+            }catch (\Exception $exception){
+                throw new ConnectionException($this->errstr, $this->errno);
+            }
         }
 
         // if there is no socket or an error occurred very recently
