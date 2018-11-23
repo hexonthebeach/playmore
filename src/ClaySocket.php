@@ -49,8 +49,13 @@ class ClaySocket
     {
         // if there is no connection yet
         if( !$this->socket ) {
-            // open it
-            $this->socket = fsockopen($this->host, $this->port, $this->errno, $this->errstr, self::CONN_TIMEOUT);
+            try {
+                // open it
+                $this->socket = fsockopen($this->host, $this->port, $this->errno, $this->errstr, self::CONN_TIMEOUT);
+
+            }catch (\Exception $exception){
+                throw new ConnectionException($this->errstr, $this->errno);
+            }
         }
 
         // if there is no socket or an error occurred very recently
@@ -85,12 +90,15 @@ class ClaySocket
     /**
      * test the connection
      * @return bool
-     * @throws ConnectionException
      */
     public function test()
     {
-        // make sure there is an open connection
-        $this->connect();
+        try{
+            // make sure there is an open connection
+            $this->connect();
+        }catch (ConnectionException $connectionException){
+            // just testing, no consequences
+        }
 
         // check connection
         return boolval($this->socket);
@@ -101,16 +109,18 @@ class ClaySocket
      * send a command, and return the response
      * @param $message
      * @return string $response
-     * @throws ConnectionException
      * @throws SendException
      */
     public function send($message)
     {
-        // make sure there is an open connection
-        $this->connect();
+        try {
+            // write data to socket
+            $result = fwrite($this->socket, $message, strlen($message));
 
-        // write data to socket
-        $result = fwrite($this->socket, $message, strlen($message));
+        }catch (\Exception $exception){
+            // catching anything since returning an empty result is ok
+            $result = null;
+        }
 
         // fwrite returns falls on error
         if( !$result ){
@@ -127,15 +137,17 @@ class ClaySocket
      *
      * @return bool|string
      * @throws ReceiveException
-     * @throws ConnectionException
      */
     public function receive()
     {
-        // make sure there is an open connection
-        $this->connect();
+        try{
+            // catch an incoming message
+            $response = fgets($this->socket);
 
-        // catch an incoming message
-        $response = fgets($this->socket);
+        }catch (\Exception $exception){
+            // catching anything since returning an empty response is ok
+            $response = null;
+        }
 
         // fgets returns falls on error
         if( !$response ){
