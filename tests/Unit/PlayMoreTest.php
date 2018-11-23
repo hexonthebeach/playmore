@@ -2,7 +2,7 @@
     require __DIR__ .'/../../vendor/autoload.php';
 
 
-    class PlayMore extends PHPUnit_Framework_TestCase
+    class PlayMoreTest extends PHPUnit_Framework_TestCase
     {
 
         /**

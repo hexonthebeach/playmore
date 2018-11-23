@@ -2,7 +2,7 @@
 require __DIR__ .'/../../vendor/autoload.php';
 
 
-class Connection extends PHPUnit_Framework_TestCase
+class ConnectionTest extends PHPUnit_Framework_TestCase
 {
 
     /**
