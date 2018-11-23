@@ -90,12 +90,15 @@ class ClaySocket
     /**
      * test the connection
      * @return bool
-     * @throws ConnectionException
      */
     public function test()
     {
-        // make sure there is an open connection
-        $this->connect();
+        try{
+            // make sure there is an open connection
+            $this->connect();
+        }catch (ConnectionException $connectionException){
+            // just testing, no consequences
+        }
 
         // check connection
         return boolval($this->socket);
