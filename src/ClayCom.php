@@ -3,6 +3,8 @@ namespace PlayMore;
 
 use PlayMore\Exceptions\ConnectionException;
 use PlayMore\Exceptions\FileNotFoundException;
+use PlayMore\Exceptions\ReceiveException;
+use PlayMore\Exceptions\SendException;
 
 /**
  * Class ClayCom
@@ -170,7 +172,12 @@ class ClayCom
         $command = $this->command(__FUNCTION__);
 
         // send command
-        return $this->claysocket->send($command);
+        try {
+            return $this->claysocket->send($command);
+
+        }catch (SendException $sendException){
+            return false;
+        }
     }
 
 
@@ -185,7 +192,12 @@ class ClayCom
         $command = $this->command(__FUNCTION__);
 
         // send command
-        return $this->claysocket->send($command);
+        try {
+            return $this->claysocket->send($command);
+
+        }catch (SendException $sendException){
+            return false;
+        }
     }
 
 
@@ -205,7 +217,12 @@ class ClayCom
         ]);
 
         // send command
-        return $this->claysocket->send($command);
+        try {
+            return $this->claysocket->send($command);
+
+        }catch (SendException $sendException){
+            return false;
+        }
     }
 
 
