@@ -60,7 +60,7 @@ class PlayMore extends ClayCom
      * @param int $mode - disable, eth-only or dual (use GPUMode class)
      * @return bool
      */
-    public function setGpuMode(int $gpu, int $mode)
+    public function setGpuMode($gpu, $mode)
     {
         return $this->control_gpu($gpu, $mode);
     }
@@ -82,7 +82,7 @@ class PlayMore extends ClayCom
      * @param string $content
      * @return bool
      */
-    public function setConfig(string $content)
+    public function setConfig($content)
     {
         return $this->miner_file(self::FILE_CONFIG, $content);
     }
@@ -104,7 +104,7 @@ class PlayMore extends ClayCom
      * @param string $content
      * @return bool
      */
-    public function setEpools(string $content)
+    public function setEpools($content)
     {
         return $this->miner_file(self::FILE_EPOOLS, $content);
     }
@@ -126,7 +126,7 @@ class PlayMore extends ClayCom
      * @param string $content
      * @return bool
      */
-    public function setDpools(string $content)
+    public function setDpools($content)
     {
         return $this->miner_file(self::FILE_DPOOLS, $content);
     }
