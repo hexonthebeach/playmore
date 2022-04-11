@@ -70,7 +70,6 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: vendor-for-php-v${{ matrix.version }}
-        path: vendor
 
     - name: Run test suite
       run: php vendor/bin/phpunit ./tests
