@@ -4,11 +4,12 @@
     "homepage":    "https://github.com/hexonthebeach/playmore",
     "type":        "library",
     "keywords":    ["claymore","ethereum","crypto","mining","miner","remote management","EthMan"],
+    "license":     "MIT",
     "authors":     [
         {"name":"Niels Verbaken"}
     ],
     "require":     {
-        "php": ">= 5.6",
+        "php": "7.*",
         "ext-json": "*"
     },
     "require-dev": {
