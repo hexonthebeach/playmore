@@ -29,9 +29,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: Install dependencies
+    - name: Setup PHP
+      id: setup-php
+      uses: shivammathur/setup-php@v2
       with:
-        php_version: "7.1"
+        php-version: '7.1'
+
+    - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
