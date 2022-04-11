@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         version: ['7.0', '7.4']
-      max-parallel: 1
+      max-parallel: 2
 
     steps:
     - uses: actions/checkout@v3
@@ -48,6 +48,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
+    - name: Run test suite
+      run: php vendor/bin/phpunit ./tests
+
 
   test:
     needs: build
@@ -70,6 +73,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: vendor-for-php-v${{ matrix.version }}
+        path: vendor
 
     - name: Run test suite
       run: php vendor/bin/phpunit ./tests
