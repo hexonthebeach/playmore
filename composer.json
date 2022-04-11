@@ -9,7 +9,7 @@
         {"name":"Niels Verbaken"}
     ],
     "require":     {
-        "php": "7.*",
+        "php": "7.*||8.*",
         "ext-json": "*"
     },
     "require-dev": {
