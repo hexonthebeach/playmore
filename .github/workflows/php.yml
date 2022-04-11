@@ -28,7 +28,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-${{ matrix.version }}
         restore-keys: |
           ${{ runner.os }}-php-
 
@@ -37,13 +37,6 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.version }}
-
-    - name: Archive vendor dir
-      uses: actions/upload-artifact@v2
-      with:
-        name: vendor-for-php-v${{ matrix.version }}
-        path: vendor
-        retention-days: 1
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
@@ -68,12 +61,15 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.version }}
-        
-    - name: Download a single artifact
-      uses: actions/download-artifact@v2
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
       with:
-        name: vendor-for-php-v${{ matrix.version }}
         path: vendor
+        key: ${{ runner.os }}-php-${{ matrix.version }}
+        restore-keys: |
+          ${{ runner.os }}-php-
 
     - name: Run test suite
       run: php vendor/bin/phpunit ./tests
