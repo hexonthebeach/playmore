@@ -13,6 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [7.0, 7.1, 8.0, 8.1]
+      max-parallel: 2
 
     steps:
     - uses: actions/checkout@v3
@@ -30,22 +34,13 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Setup PHP
-      id: setup-php-low
+      id: setup-php
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.0'
+        php-version: ${{ matrix.version }}
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-
-    - name: Setup PHP
-      id: setup-php-high
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
-
-    - name: Install dependencies
-      run: composer update --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
