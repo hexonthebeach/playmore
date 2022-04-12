@@ -72,7 +72,7 @@ jobs:
         key: php-${{ matrix.version }}-${{ github.ref }}
 
     - name: Run test suite
-      run: php vendor/bin/phpunit --coverage-clover=coverage.xml ./tests
+      run: php vendor/bin/phpunit --coverage-clover=coverage.xml --whitelist=./src ./tests
       
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
