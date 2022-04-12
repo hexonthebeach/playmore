@@ -5,6 +5,7 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -28,9 +29,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: vendor
-        key: ${{ runner.os }}-php-${{ matrix.version }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+        key: php-${{ matrix.version }}-${{ github.ref }}
 
     - name: Setup PHP
       id: setup-php
@@ -40,9 +39,6 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-
-    - name: Run test suite
-      run: php vendor/bin/phpunit ./tests
 
 
   test:
@@ -67,9 +63,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: vendor
-        key: ${{ runner.os }}-php-${{ matrix.version }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+        key: php-${{ matrix.version }}-${{ github.ref }}
 
     - name: Run test suite
       run: php vendor/bin/phpunit ./tests
