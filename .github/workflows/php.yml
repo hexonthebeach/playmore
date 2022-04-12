@@ -36,6 +36,9 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.version }}
+        coverage: none
+      env:
+        COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
@@ -57,6 +60,9 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.version }}
+        coverage: xdebug
+      env:
+        COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Cache Composer packages
       id: composer-cache
