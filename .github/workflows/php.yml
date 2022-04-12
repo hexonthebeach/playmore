@@ -72,4 +72,9 @@ jobs:
         key: php-${{ matrix.version }}-${{ github.ref }}
 
     - name: Run test suite
-      run: php vendor/bin/phpunit ./tests
+      run: php vendor/bin/phpunit --coverage-clover=coverage.xml ./tests
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage.xml
