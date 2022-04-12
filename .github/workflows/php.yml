@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Build and Test
 
 on:
   push:
@@ -73,8 +73,27 @@ jobs:
 
     - name: Run test suite
       run: php vendor/bin/phpunit --coverage-clover=coverage.xml ./tests
+      
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: coverage.xml
+        retention-days: 1
+
+
+  coverage_upload:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download code coverage results
+      uses: actions/download-artifact@v3
+      with:
+        name: code-coverage-report
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
         files: ./coverage.xml
+  
