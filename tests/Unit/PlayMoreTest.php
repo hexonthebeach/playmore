@@ -1,8 +1,12 @@
 <?php
-    require __DIR__ .'/../../vendor/autoload.php';
 
+namespace Unit;
 
-    class PlayMoreTest extends PHPUnit_Framework_TestCase
+require __DIR__ .'/../../vendor/autoload.php';
+
+use PHPUnit\Framework\TestCase;
+
+    class PlayMoreTest extends TestCase
     {
 
         /**

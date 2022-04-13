@@ -1,8 +1,12 @@
 <?php
+
+namespace Feature;
+
+use PHPUnit\Framework\TestCase;
+
 require __DIR__ .'/../../vendor/autoload.php';
 
-
-class ConnectionTest extends PHPUnit_Framework_TestCase
+class ConnectionTest extends TestCase
 {
 
     /**
